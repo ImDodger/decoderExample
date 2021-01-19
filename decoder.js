@@ -80,11 +80,59 @@ let letterRip = [
 ]
 
 function charToHex(msg){
-    let myMsg = msg.join("");
-    return `${msg} is the message`;
+    let endArr = [];
+    msg.forEach(ms =>{
+        let letter;
+        try{
+            letter = letterRip.filter(ltr => ms==ltr.plain)[0].hex;
+        }
+        catch{
+            console.error(`${ms} does not exist will add an *`);
+            letter = "*";
+        }
+        if(letter){
+            endArr.push(letter.toString());
+        }else{
+            endArr.push("*");
+        }
+    });
+    console.log(endArr);
+    return endArr.join(" ");
 };
 
+function hexToChar(msg){
+    let endMsg = "";
+    msg.forEach(ms =>{
+        let letter;
+        try{
+            letter = letterRip.filter(ltr => ms==ltr.hex)[0].plain;
+        }
+        catch{
+            console.error(`${ms} does not exist will add an *`);
+            letter = "*";
+        }
+        if(letter){
+            endMsg += letter;
+        }else{
+            endMsg += "*";
+        }
+    });
+    console.log(endMsg);
+    return endMsg;
+}
+
 function initActions(){
+    // Get values for the decoder
+    let decoderBtn = document.querySelector("#decoderBtn");
+    let decoderInput = document.querySelector("#decoderEntry");
+    let decoderDisplay = document.querySelector("#decoderOutput");
+
+    decoderBtn.addEventListener("click", e=>{
+        // Split every character from our input window
+        let msg = decoderInput.value.split(" ");
+        // Set the display of the decode to the output of hexToChar
+    })
+    // Get values for the encoder
     let encoderBtn = document.querySelector("#encoderBtn");
     let encoderInput = document.querySelector("#encoderEntry");
     let encoderDisplay = document.querySelector("#encoderOutput");
