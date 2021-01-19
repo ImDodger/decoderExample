@@ -131,6 +131,7 @@ function initActions(){
         // Split every character from our input window
         let msg = decoderInput.value.split(" ");
         // Set the display of the decode to the output of hexToChar
+        decoderDisplay.innerText = hexToChar(msg);
     })
     // Get values for the encoder
     let encoderBtn = document.querySelector("#encoderBtn");
